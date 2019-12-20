@@ -1,6 +1,4 @@
-/*
-TODO: Create a logger.
-*/
+#include "logger.h"
 
 #include <iostream>
 #include <signal.h>
@@ -31,6 +29,7 @@ struct msgbuff {
 
 int currentTime, runningProcesses;
 bool isDiskAvailable;
+logger logfile;
 
 void setUpSignalHandlers();
 pid_t createDisk(string diskFilePath, key_t toDiskQueueID, key_t fromDiskQueueID);
@@ -45,6 +44,7 @@ void terminateDisk(pid_t diskPID);
 
 
 int main() {
+    logfile.openFile("logfile.txt");
     currentTime = 1;
     isDiskAvailable = true;
     key_t requestsQueueID, toDiskQueueID, fromDiskQueueID;
@@ -60,14 +60,15 @@ int main() {
     }
     terminateDisk(diskPID);
     terminateMessageQueues(requestsQueueID, toDiskQueueID, fromDiskQueueID);
+    logfile.closeFile();
 }
 
 /************** Termination Handling **************/
 
 void terminateDisk(pid_t diskPID) {
-    cout << "All processes exited, terminating disk..." << endl;
+    logfile.writeToFile("All processes exited, terminating disk...");
     kill(diskPID, SIGKILL);
-    cout << "Exiting..." << endl;
+    logfile.writeToFile("Exiting...");
 }
 
 void terminateMessageQueues(key_t& requestsQueueID, key_t& toDiskQueueID, key_t& fromDiskQueueID) {
@@ -91,8 +92,7 @@ bool checkRequest(key_t requestsQueueID, msgbuff& request) {
 void getRequests(queue<msgbuff>& requests, key_t requestsQueueID) {
     msgbuff request;
     while(checkRequest(requestsQueueID, request)) {
-        cout << "Request received, type: " << request.mtype << " data: ";
-        cout << request.data << endl;
+        logfile.writeToFile("Request received, type: " + std::to_string(request.mtype) + " data: " + request.data);
         requests.push(request);
     }
 }
