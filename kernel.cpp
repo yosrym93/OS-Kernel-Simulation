@@ -30,7 +30,7 @@ struct msgbuff {
 };
 
 int currentTime, runningProcesses;
-bool isDiskAvailable, isProcessesRunning;
+bool isDiskAvailable;
 
 void incrementTime();
 void setUpSignalHandlers();
@@ -47,7 +47,6 @@ void terminateDisk(pid_t diskPID);
 int main() {
     currentTime = 1;
     isDiskAvailable = true;
-    isProcessesRunning = true;
     key_t requestsQueueID, toDiskQueueID, fromDiskQueueID;
     queue<msgbuff> requests;
     createMessageQueues(requestsQueueID, toDiskQueueID, fromDiskQueueID);
@@ -55,7 +54,7 @@ int main() {
     int diskPID = createDisk(DISK_EXECUTABLE_FILE, toDiskQueueID, fromDiskQueueID);
     createProcesses(PROCESS_EXECUTABLE_FILE, PROCESS_INPUT_FILE_NAME, PROCESSES_COUNT, requestsQueueID);
     alarm(1);
-    while(isProcessesRunning) {
+    while(runningProcesses > 0 || !requests.empty() || !isDiskAvailable) {
         getRequests(requests, requestsQueueID);
         sendDiskOperation(requests, toDiskQueueID, fromDiskQueueID, diskPID);
     }
@@ -154,12 +153,8 @@ void SIGCHLD_handler(int signum) {
 }
 
 void SIGALRM_handler(int signum) {
-    if(runningProcesses == 0)
-        isProcessesRunning = false;
-    else {
-        alarm(1);
-        killpg(getpgrp(), SIGUSR2);
-    }
+    alarm(1);
+    killpg(getpgrp(), SIGUSR2);
 }
 
 void setUpSignalHandlers() {
