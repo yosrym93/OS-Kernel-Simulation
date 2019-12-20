@@ -1,54 +1,37 @@
-#include<iostream>
 #include <fstream>  
-#include"string"
 using namespace std;
 
 
-class logger
+class Logger
 {
 private:
     ofstream myfile; 
 public:
-    logger();
+    Logger();
     void openFile(string f);
-    void writeToFile(string data);
+    void log(string data);
     void closeFile();  
-    ~logger();
+    ~Logger();
 };
 
-logger::logger()
+Logger::Logger()
 {}
 
-logger::~logger()
+Logger::~Logger()
 {}
 
-void logger::openFile(string f)
+void Logger::openFile(string f)
 {
-    myfile.open (f);
-    myfile << "New log file\n\n";
+    myfile.open(f);
 }
 
 
-void logger::writeToFile(string data)
+void Logger::log(string data)
 {
-    myfile << data + "\n\n";
+    myfile << data << endl;
 }
 
-void logger::closeFile()
+void Logger::closeFile()
 {
-    myfile << "End of log file\n\n";
-    
     myfile.close();
 }
-
-/*
-int main()
-{
-    char a[4];
-    a[0] = 'a';
-    a[1] = 'a';
-    a[2] = 'a';
-    string b = "bbb";
-    cout << a + b;
-}
-*/

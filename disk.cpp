@@ -12,21 +12,20 @@
 
 using namespace std;
 
-key_t fromDiskQueueID, toDiskQueueID;
-
 struct msgbuff {
     long mtype;
     char data[MSG_SIZE];
 };
 
+const int DATA_SIZE = sizeof(msgbuff) - sizeof(long);
+key_t fromDiskQueueID, toDiskQueueID;
+
 void SIGUSR1_handler(int signum) {
     msgbuff response;
     response.mtype = 1;
     strncpy(response.data, "1", 1);
-    msgsnd(fromDiskQueueID, &response, MSG_SIZE, IPC_NOWAIT);
-    cout << "1 free space available" << endl;
-    msgrcv(toDiskQueueID, &response, MSG_SIZE, 0, 0); // Blocking call, should not enter if no space is available
-    cout << "Message received, mtype = " << response.mtype << " data = " << response.data << endl;
+    msgsnd(fromDiskQueueID, &response, DATA_SIZE, IPC_NOWAIT);
+    msgrcv(toDiskQueueID, &response, DATA_SIZE, 0, 0); // Blocking call, should not enter if no space is available
     kill(getppid(), SIGUSR1);
 }
 
@@ -38,5 +37,10 @@ int main(int argc, char* argv[]) {
     fromDiskQueueID =  key_t(stoi(argv[2]));
     signal(SIGUSR1, SIGUSR1_handler);
     signal(SIGUSR2, SIGUSR2_handler);
-    while(true) {};
+    msgbuff response;
+    while(true) {
+        int status = msgrcv(toDiskQueueID, &response, DATA_SIZE, 0, IPC_NOWAIT);
+        if(status != -1)
+            kill(getppid(), SIGUSR1);
+    };
 }
