@@ -32,7 +32,6 @@ struct msgbuff {
 int currentTime, runningProcesses;
 bool isDiskAvailable;
 
-void incrementTime();
 void setUpSignalHandlers();
 pid_t createDisk(string diskFilePath, key_t toDiskQueueID, key_t fromDiskQueueID);
 void createProcesses(string processFilePath, string processInputFile, 
@@ -41,6 +40,7 @@ void getRequests(queue<msgbuff>& requests, key_t requestsQueueID);
 void sendDiskOperation(queue<msgbuff>& requests, key_t toDiskQueueID, 
                        key_t fromDiskQueueID, pid_t diskPID);
 void createMessageQueues(key_t& requestsQueueID, key_t& toDiskQueueID, key_t& fromDiskQueueID);
+void terminateMessageQueues(key_t& requestsQueueID, key_t& toDiskQueueID, key_t& fromDiskQueueID);
 void terminateDisk(pid_t diskPID);
 
 
@@ -59,12 +59,21 @@ int main() {
         sendDiskOperation(requests, toDiskQueueID, fromDiskQueueID, diskPID);
     }
     terminateDisk(diskPID);
+    terminateMessageQueues(requestsQueueID, toDiskQueueID, fromDiskQueueID);
 }
+
+/************** Termination Handling **************/
 
 void terminateDisk(pid_t diskPID) {
     cout << "All processes exited, terminating disk..." << endl;
     kill(diskPID, SIGKILL);
     cout << "Exiting..." << endl;
+}
+
+void terminateMessageQueues(key_t& requestsQueueID, key_t& toDiskQueueID, key_t& fromDiskQueueID) {
+    msgctl(requestsQueueID, IPC_RMID, nullptr);
+    msgctl(toDiskQueueID, IPC_RMID, nullptr);
+    msgctl(fromDiskQueueID, IPC_RMID, nullptr);
 }
 
 /************** Requests Handling **************/
@@ -115,7 +124,6 @@ void sendDiskOperation(queue<msgbuff>& requests,
     if(isDiskAvailable && !requests.empty()) {
         auto currentRequest = requests.front();
         requests.pop();
-        cout << "current request type = " << currentRequest.mtype << " data = " << currentRequest.data << endl;
         if(currentRequest.mtype == ADD_REQ && !checkDiskFreeSlots(fromDiskQueueID, diskPID)) {
             clearAddRequests(requests);
             return;
