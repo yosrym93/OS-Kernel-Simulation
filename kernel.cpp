@@ -45,7 +45,7 @@ void logTerminating();
 
 
 int main() {
-    logger.initializeLogger(LOG_FILE_NAME, currentTime);
+    logger.initialize(LOG_FILE_NAME, currentTime);
     currentTime = 1;
     isDiskAvailable = true;
     processesRunning = true;
@@ -63,7 +63,7 @@ int main() {
     terminateDisk(diskPID);
     terminateMessageQueues(requestsQueueID, toDiskQueueID, fromDiskQueueID);
     logTerminating();
-    logger.terminateLogger();
+    logger.terminate();
 }
 
 /************** Termination Handling **************/

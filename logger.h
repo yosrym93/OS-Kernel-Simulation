@@ -8,12 +8,12 @@ private:
     ofstream myfile;
     int* logTime; 
 public:
-    void initializeLogger(string file, int& currentTime);
+    void initialize(string file, int& currentTime);
     void log(string data);
-    void terminateLogger();  
+    void terminate();  
 };
 
-void Logger::initializeLogger(string file, int& currentTime)
+void Logger::initialize(string file, int& currentTime)
 {
     myfile.open(file);
     logTime = &currentTime;
@@ -25,7 +25,7 @@ void Logger::log(string data)
     myfile << *logTime << "\t" << data << endl;
 }
 
-void Logger::terminateLogger()
+void Logger::terminate()
 {
     myfile.close();
 }
