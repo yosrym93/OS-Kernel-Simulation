@@ -1,21 +1,21 @@
-Request received, type: ADD, data: p2t1 
-Disk is being checked for free slots
-Disk has 1 free slot(s)
-Request sent to disk, type: ADD, data: p2t1 
-Request received, type: ADD, data: p1t2 
-Disk is being checked for free slots
-Disk has 1 free slot(s)
-Request sent to disk, type: ADD, data: p1t2 
-Request received, type: DEL, data: 1 
-Request sent to disk, type: DEL, data: 1 
-Request received, type: DEL, data: 1 
-Request sent to disk, type: DEL, data: 1 
-Request received, type: ADD, data: p2t4 
-Request received, type: ADD, data: p1t4 
-Disk is being checked for free slots
-Disk has 1 free slot(s)
-Request sent to disk, type: ADD, data: p2t4 
-Disk is being checked for free slots
-Disk has 1 free slot(s)
-Request sent to disk, type: ADD, data: p1t4 
-All processes exited and all requests are served, exiting..
+1	Request received, type: ADD, data: p2t1 
+1	Disk is being checked for free slots
+1	Disk has 1 free slot(s)
+1	Request sent to disk, type: ADD, data: p2t1 
+2	Request received, type: ADD, data: p1t2 
+2	Disk is being checked for free slots
+2	Disk has 1 free slot(s)
+2	Request sent to disk, type: ADD, data: p1t2 
+3	Request received, type: DEL, data: 1 
+3	Request sent to disk, type: DEL, data: 1 
+3	Request received, type: DEL, data: 1 
+3	Request sent to disk, type: DEL, data: 1 
+4	Request received, type: ADD, data: p2t4 
+4	Request received, type: ADD, data: p1t4 
+4	Disk is being checked for free slots
+4	Disk has 1 free slot(s)
+4	Request sent to disk, type: ADD, data: p2t4 
+4	Disk is being checked for free slots
+4	Disk has 1 free slot(s)
+4	Request sent to disk, type: ADD, data: p1t4 
+4	All processes exited and all requests are served, exiting..
