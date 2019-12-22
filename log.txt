@@ -1,21 +1,53 @@
-1	Request received, type: ADD, data: p2t1 
-1	Disk is being checked for free slots
-1	Disk has 1 free slot(s)
-1	Request sent to disk, type: ADD, data: p2t1 
-2	Request received, type: ADD, data: p1t2 
+2	Request received, type: ADD, data: Hello from the other side 
+2	Request received, type: DEL, data: 3 
 2	Disk is being checked for free slots
-2	Disk has 1 free slot(s)
-2	Request sent to disk, type: ADD, data: p1t2 
-3	Request received, type: DEL, data: 1 
-3	Request sent to disk, type: DEL, data: 1 
-3	Request received, type: DEL, data: 1 
-3	Request sent to disk, type: DEL, data: 1 
-4	Request received, type: ADD, data: p2t4 
-4	Request received, type: ADD, data: p1t4 
-4	Disk is being checked for free slots
-4	Disk has 1 free slot(s)
-4	Request sent to disk, type: ADD, data: p2t4 
-4	Disk is being checked for free slots
-4	Disk has 1 free slot(s)
-4	Request sent to disk, type: ADD, data: p1t4 
-4	All processes exited and all requests are served, exiting..
+2	Disk has 10 free slot(s)
+2	Request sent to disk, type: ADD, data: Hello from the other side 
+3	Request received, type: ADD, data: I must've called a thousand ti
+5	Request received, type: ADD, data: Seem to be home 
+5	Request received, type: ADD, data: Hello from the outside 
+5	Request sent to disk, type: DEL, data: 3 
+6	Disk is being checked for free slots
+6	Disk has 9 free slot(s)
+6	Request sent to disk, type: ADD, data: I must've called a thousand ti
+6	Request received, type: ADD, data: But when I call you never 
+7	Request received, type: ADD, data: For everything that I've done 
+8	Request received, type: ADD, data: To tell you I'm sorry 
+9	Disk is being checked for free slots
+9	Disk has 8 free slot(s)
+9	Request sent to disk, type: ADD, data: Seem to be home 
+10	Request received, type: ADD, data: At least I can say that I've t
+12	Disk is being checked for free slots
+12	Disk has 7 free slot(s)
+12	Request sent to disk, type: ADD, data: Hello from the outside 
+13	Request received, type: ADD, data: For breaking your heart 
+14	Request received, type: ADD, data: But it don't matter, it clearl
+15	Disk is being checked for free slots
+15	Disk has 6 free slot(s)
+15	Request sent to disk, type: ADD, data: But when I call you never 
+18	Disk is being checked for free slots
+18	Disk has 5 free slot(s)
+18	Request sent to disk, type: ADD, data: For everything that I've done 
+19	Request received, type: ADD, data: To tell you I'm sorry 
+21	Disk is being checked for free slots
+21	Disk has 4 free slot(s)
+21	Request sent to disk, type: ADD, data: To tell you I'm sorry 
+24	Disk is being checked for free slots
+24	Disk has 3 free slot(s)
+24	Request sent to disk, type: ADD, data: At least I can say that I've t
+25	Request received, type: ADD, data: Doesn't tear you apart anymore
+27	Disk is being checked for free slots
+27	Disk has 2 free slot(s)
+27	Request sent to disk, type: ADD, data: For breaking your heart 
+30	Disk is being checked for free slots
+30	Disk has 1 free slot(s)
+30	Request sent to disk, type: ADD, data: But it don't matter, it clearl
+30	Request received, type: DEL, data: 2 
+30	Request received, type: DEL, data: 2 
+30	Request received, type: DEL, data: 1 
+33	Disk is being checked for free slots
+33	Disk has 0 free slot(s)
+33	Request sent to disk, type: DEL, data: 2 
+34	Request sent to disk, type: DEL, data: 2 
+35	Request sent to disk, type: DEL, data: 1 
+36	All processes exited and all requests are served, exiting..

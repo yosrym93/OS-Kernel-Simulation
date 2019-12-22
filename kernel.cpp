@@ -93,9 +93,9 @@ void logFreeSlotsChecked() {
     logger.log(logData);
 }
 
-void logCheckDiskResponse(const msgbuff& response) {
+void logCheckDiskResponse(int freeSlots) {
     string logData = "Disk has ";
-    logData += response.data[0];
+    logData += to_string(freeSlots);
     logData += " free slot(s)";
     logger.log(logData);
 }
@@ -145,8 +145,8 @@ bool checkDiskFreeSlots(key_t fromDiskQueueID, pid_t diskPID) {
     logFreeSlotsChecked();
     msgbuff diskResponse;
     int status = msgrcv(fromDiskQueueID, &diskResponse, DATA_SIZE, 0, 0);
-    int freeSlots = int(diskResponse.data[0]) - int('0');
-    logCheckDiskResponse(diskResponse);
+    int freeSlots = int(diskResponse.data[0]);
+    logCheckDiskResponse(freeSlots);
     return freeSlots > 0;
 }
 
@@ -202,10 +202,10 @@ void SIGCHLD_handler(int signum) {
 void SIGALRM_handler(int signum) {
     if(runningProcesses == 0)
         processesRunning = false;
-    else {
-        alarm(1);
-        killpg(getpgrp(), SIGUSR2);
-    }
+    
+    alarm(1);
+    killpg(getpgrp(), SIGUSR2);
+    
 }
 
 void setUpSignalHandlers() {

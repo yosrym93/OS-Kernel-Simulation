@@ -1,3 +1,10 @@
-4 ADD  p2t4 
-3 DEL  1 
-1 ADD  p2t1
+2	ADD		Hello from the other side
+3	ADD		I must've called a thousand times
+8	ADD		To tell you I'm sorry
+7	ADD		For everything that I've done
+6	ADD		But when I call you never
+5	ADD		Seem to be home
+30	DELETE	1
+30	DELETE	2
+30	DELETE	2
+

@@ -1,3 +1,7 @@
-4 ADD  p1t4 
-3 DEL  1 
-2 ADD  p1t2
+5	ADD 	Hello from the outside
+10	ADD 	At least I can say that I've tried
+19	ADD 	To tell you I'm sorry
+13	ADD 	For breaking your heart
+14	ADD 	But it don't matter, it clearly
+25	ADD 	Doesn't tear you apart anymore
+2	DELETE	3
