@@ -3,7 +3,7 @@ A coursework project simulating the interactions between a kernel process, a dis
 
 
 Requirements:
-Unix system
+Unix system, g++ compiler
 
 Instructions:
 1. Compile "process.cpp" and "disk.cpp" files using g++, name the outputs "process" and "disk" respectively.
